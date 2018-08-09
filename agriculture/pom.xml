@@ -21,32 +21,27 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.sonarsource.scanner.maven/sonar-maven-plugin -->
+<dependency>
+<groupId>org.sonarsource.scanner.maven</groupId>
+<artifactId>sonar-maven-plugin</artifactId>
+<version>3.2</version>
+</dependency>
+  </dependencies>
     
-    <dependency>
-      <groupId>org.sonarsource.sonarqube</groupId>
-      <artifactId>sonar-plugin-api</artifactId>
-      <!-- minimal version of SonarQube to support. Note that the groupId was "org.codehaus.sonar" before version 5.2 -->
-      <version>5.6</version>
-      <!-- mandatory scope -->
-      <scope>provided</scope>
-    </dependency>
-    </dependencies>
-  
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
-        <artifactId>sonar-packaging-maven-plugin</artifactId>
-        <version>1.17</version>
-        <extensions>true</extensions>
-        <configuration>
-          <!-- the entry-point class that extends org.sonar.api.SonarPlugin -->
-          <pluginClass>com.mycompany.sonar.reference.ExamplePlugin</pluginClass>
-           
-          <!-- advanced properties can be set here. See paragraph "Advanced Build Properties". -->
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-  
-</project>
+  <profiles>
+<profile>
+<id>sonar</id>
+<activation>
+<activeByDefault>true</activeByDefault>
+</activation>
+<properties>
+<!-- Optional URL to server. Default value is http://localhost:9000 -->
+<sonar.host.url>
+http://ec2-18-222-112-40.us-east-2.compute.amazonaws.com:9000
+</sonar.host.url>
+</properties>
+</profile>
+</profiles>
+    
+  </project>
